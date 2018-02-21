@@ -1,0 +1,33 @@
+<h2>Show Task</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @post.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @post.description %>
+  </li>
+
+  <li>
+    <strong>Time:</strong>
+    <%= @post.time %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @post.user.name %>
+  </li>
+
+  <li>
+    <strong>Completed:</strong>
+    <%= @post.completed %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: post_path(@conn, :edit, @post) %></span>
+<span><%= link "Back", to: post_path(@conn, :index) %></span>

@@ -1,0 +1,53 @@
+<%= if @current_user do %>
+  <h1 class="">Your Tasks</h1>
+  <span class="float-right"><%= link "Create new task", to: post_path(@conn, :new), class: "btn btn-primary btn-xs" %></span>
+
+  <div class="row">
+    <div class="col">
+      <h4>To do</h4>
+
+      <%= Enum.map @posts, fn post -> %>
+        <%= if @current_user.id == post.user.id and not post.completed do %>
+          <div class="card">
+            <div class="card-body">
+              <div class="float-left">
+                <h6><%= post.title %></h6>
+                <p><%= post.description %></p>
+                <p>Time spent: <%= post.time %></p>
+              </div>
+              <div class="float-right">
+                <span><%= link "Edit", to: post_path(@conn, :edit, post), class: "btn btn-primary btn-xs" %></span>
+                <span><%= link "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col">
+      <h4>Completed</h4>
+      <%= Enum.map @posts, fn post -> %>
+        <%= if @current_user.id == post.user.id and post.completed do %>
+          <div class="card">
+            <div class="card-body">
+              <div class="float-left">
+                <h6><%= post.title %></h6>
+                <p><%= post.description %></p>
+                <p>Time spent: <%= post.time %></p>
+              </div>
+              <div class="float-right">
+                <span><%= link "Edit", to: post_path(@conn, :edit, post), class: "btn btn-primary btn-xs" %></span>
+                <span><%= link "Delete", to: post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+<% else %>
+  <div>
+    <h3><span><%= link "Log in", to: "/" %> to view your tasks</span></h3>
+  </div>
+<% end %>
