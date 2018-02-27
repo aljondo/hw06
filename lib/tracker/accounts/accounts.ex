@@ -73,6 +73,9 @@ defmodule Tracker.Accounts do
 
   """
   def update_user(%User{} = user, attrs) do
+    IO.puts "update_user hopefully"
+    IO.inspect attrs
+    
     user
     |> User.changeset(attrs)
     |> Repo.update()

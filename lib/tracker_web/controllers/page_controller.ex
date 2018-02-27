@@ -10,4 +10,9 @@ defmodule TrackerWeb.PageController do
     changeset = Tracker.Social.change_post(%Tracker.Social.Post{})
     render conn, "tasks.html", posts: posts, changeset: changeset
   end
+
+  def taskreport(conn, _params) do
+  	posts = Tracker.Social.list_posts()
+  	render conn, "taskreport.html", posts: posts
+  end
 end

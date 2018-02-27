@@ -26,6 +26,7 @@ defmodule TrackerWeb.Router do
 
     get "/", PageController, :index
     get "/tasks", PageController, :tasks
+    get "/taskreport", PageController, :taskreport
 
     resources "/users", UserController
     resources "/posts", PostController
