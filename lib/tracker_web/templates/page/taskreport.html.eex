@@ -1,0 +1,28 @@
+<%= if @current_user do %>
+  <h1 class="">Task Report</h1>
+  <!--<span class="float-right"><%= link "Create new task", to: post_path(@conn, :new), class: "btn btn-primary btn-xs" %></span>-->
+  <%= if Enum.count(get_underlings(@current_user.id)) > 0 do %>
+    <table class="table">
+      <tr>
+        <th>Task name</th>
+        <th>Assignee</th>
+        <th>Completed</th>
+      </tr>
+      <%= Enum.map get_underlings(@current_user.id), fn underling -> %>
+        <%= Enum.map get_tasks_by_user(underling.id), fn task -> %>
+          <tr>
+            <td><%= task.title %></td>
+            <td><%= underling.name %></td>
+            <td><%= task.completed %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% else %>
+    <h3>Only managers can see task reports</h3>
+  <% end %>
+<% else %>
+  <div>
+    <h3><span><%= link "Log in", to: "/" %> to view your tasks</span></h3>
+  </div>
+<% end %>
